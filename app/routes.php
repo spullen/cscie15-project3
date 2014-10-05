@@ -15,3 +15,19 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::get('/lorem-ipsum', function() {
+  return '';
+});
+
+Route::post('/lorem-ipsum', function() {
+  return '';
+});
+
+Route::get('/user-generator', function() {
+  return '';
+});
+
+Route::post('/user-generator', function() {
+  return '';
+});
