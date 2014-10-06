@@ -13,21 +13,21 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('home');
 });
 
 Route::get('/lorem-ipsum', function() {
-  return '';
+  return View::make('lorem_ipsum');
 });
 
 Route::post('/lorem-ipsum', function() {
-  return '';
+  return View::make('lorem_ipsum');
 });
 
 Route::get('/user-generator', function() {
-  return '';
+  return View::make('user_generator');
 });
 
 Route::post('/user-generator', function() {
-  return '';
+  return View::make('user_generator');
 });
