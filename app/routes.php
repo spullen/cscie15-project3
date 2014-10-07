@@ -20,9 +20,19 @@ Route::get('/lorem-ipsum', function() {
   return View::make('lorem_ipsum');
 });
 
-Route::post('/lorem-ipsum', function() {
-  return View::make('lorem_ipsum');
-});
+Route::post('/lorem-ipsum', array(
+  'as' => 'generate_lorem_ipsum',
+  function() {
+    $numberOfParagraphs = Input::get('number_of_paragraphs');
+
+    $generator = new Badcow\LoremIpsum\Generator();
+    $paragraphs = $generator->getParagraphs($numberOfParagraphs);
+
+    return View::make('lorem_ipsum')
+      ->with('numberOfParagraphs', $numberOfParagraphs)
+      ->with('paragraphs', $paragraphs);
+  }
+));
 
 Route::get('/user-generator', function() {
   return View::make('user_generator');
