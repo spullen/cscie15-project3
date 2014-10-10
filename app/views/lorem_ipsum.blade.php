@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('body')
-  {{ Form::open(array('route' => 'generate_lorem_ipsum', 'class' => 'form-inline')) }}
+  {{ Form::open(array('action' => 'LoremIpsumController@postCreate', 'class' => 'form-inline')) }}
     <div class="form-group">
       {{ Form::label('number_of_paragraphs', 'Number of paragraphs', array('class' => 'control-label')) }}
       {{ Form::number('number_of_paragraphs', isset($numberOfParagraphs) ? $numberOfParagraphs : 5, array('class' => 'form-control')) }}

@@ -11,33 +11,12 @@
 |
 */
 
-Route::get('/', function()
-{
+Route::get('/', function() {
 	return View::make('home');
 });
 
-Route::get('/lorem-ipsum', function() {
-  return View::make('lorem_ipsum');
-});
+Route::get('lorem-ipsum', 'LoremIpsumController@getCreate');
+Route::post('lorem-ipsum', 'LoremIpsumController@postCreate');
 
-Route::post('/lorem-ipsum', array(
-  'as' => 'generate_lorem_ipsum',
-  function() {
-    $numberOfParagraphs = Input::get('number_of_paragraphs');
-
-    $generator = new Badcow\LoremIpsum\Generator();
-    $paragraphs = $generator->getParagraphs($numberOfParagraphs);
-
-    return View::make('lorem_ipsum')
-      ->with('numberOfParagraphs', $numberOfParagraphs)
-      ->with('paragraphs', $paragraphs);
-  }
-));
-
-Route::get('/user-generator', function() {
-  return View::make('user_generator');
-});
-
-Route::post('/user-generator', function() {
-  return View::make('user_generator');
-});
+Route::get('user-generator', 'UserGeneratorController@getCreate');
+Route::post('user-generator', 'UserGeneratorController@postCreate');
