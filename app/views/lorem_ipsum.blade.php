@@ -4,7 +4,7 @@
   {{ Form::open(array('action' => 'LoremIpsumController@postCreate', 'class' => 'form-inline')) }}
     <div class="form-group">
       {{ Form::label('number_of_paragraphs', 'Number of paragraphs', array('class' => 'control-label')) }}
-      {{ Form::number('number_of_paragraphs', isset($numberOfParagraphs) ? $numberOfParagraphs : 5, array('class' => 'form-control')) }}
+      {{ Form::number('number_of_paragraphs', Input::get('number_of_paragraphs', 5), array('class' => 'form-control')) }}
       {{ Form::submit('Generate', array('class' => 'btn btn-primary')) }}
     </div>
   {{ Form::close() }}

@@ -13,7 +13,6 @@ class LoremIpsumController extends BaseController {
     $paragraphs = $generator->getParagraphs($numberOfParagraphs);
 
     return View::make('lorem_ipsum')
-      ->with('numberOfParagraphs', $numberOfParagraphs)
       ->with('paragraphs', $paragraphs);
   }
 }

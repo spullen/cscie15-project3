@@ -7,7 +7,18 @@ class UserGeneratorController extends BaseController {
   }
 
   public function postCreate() {
+    $faker = Faker\Factory::create();
+
     $pg = new PasswordGenerator(array('number_of_words' => 4));
-    return View::make('user_generator');
+
+    $numberOfUsers = Input::get('number_of_words');
+
+    $users = array();
+    for($i = 0; $i < $numberOfUsers; $i++) {
+
+    }
+
+    return View::make('user_generator')
+      ->with('users', $users);
   }
 }
