@@ -2,10 +2,12 @@
 
 @section('body')
   {{ Form::open(array('action' => 'UserGeneratorController@postCreate', 'class' => 'form-horizontal')) }}
-    <div class="form-group">
+    <div class="form-group {{ $errors->has('number_of_users') ? 'has-error' : '' }}">
       {{ Form::label('number_of_users', 'Number of users', array('class' => 'col-md-2 col-sm-2 control-label')) }}
-      <div class="col-md-2 col-sm-2">
+      <div class="col-md-4 col-sm-4">
         {{ Form::number('number_of_users', Input::get('number_of_users', 5), array('class' => 'form-control')) }}
+        <span class="help-block">Number between 1 and 100</span>
+        {{ $errors->first('number_of_users', '<span class="help-block">:message</span>') }}
       </div>
     </div>
     <div class="form-group">
@@ -53,9 +55,9 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
       {{ Form::label('locale', 'Locale', array('class' => 'col-md-2 col-sm-2 control-label')) }}
-      <div class="col-md-2 col-sm-2">
+      <div class="col-md-3 col-sm-3">
         {{ Form::select('locale', array(
               'en_US' => 'United States',
               'fr_FR' => 'France',
@@ -64,6 +66,7 @@
               'es_ES' => 'Spain',
               'it_IT' => 'Italy'
         ), Input::get('locale', 'en_US'), array('class' => 'form-control')) }}
+        {{ $errors->first('locale', '<span class="help-block">:message</span>') }}
       </div>
     </div>
     <div class="form-group">

@@ -7,41 +7,51 @@ class UserGeneratorController extends BaseController {
   }
 
   public function postCreate() {
-    $faker = Faker\Factory::create(Input::get('locale'));
-
-    //$pg = new PasswordGenerator(array('number_of_words' => 4));
-
-    $numberOfUsers = Input::get('number_of_users');
-
     $users = array();
-    for($i = 0; $i < $numberOfUsers; $i++) {
-      $user = array();
-      $user['name'] = $faker->name;
+    $data = Input::all();
 
-      if(Input::get('include_email')) {
-        $user['email'] = $faker->email;
+    $rules = array(
+      'number_of_users' => array('required', 'numeric', 'between:1,100'),
+      'locale' => array('required', 'in:en_US,fr_FR,de_DE,ru_RU,es_ES,it_IT')
+    );
+
+    $validator = Validator::make($data, $rules);
+
+    if($validator->passes()) {
+      $faker = Faker\Factory::create($data['locale']);
+
+      //$pg = new PasswordGenerator(array('number_of_words' => 4));
+
+      for($i = 0; $i < $data['number_of_users']; $i++) {
+        $user = array();
+        $user['name'] = $faker->name;
+
+        if(array_key_exists('include_email', $data)) {
+          $user['email'] = $faker->email;
+        }
+
+        if(array_key_exists('include_birthdate', $data)) {
+          $user['birthdate'] = $faker->date;
+        }
+
+        if(array_key_exists('include_blurb', $data)) {
+          $user['blurb'] = $faker->text;
+        }
+
+        if(array_key_exists('include_address', $data)) {
+          $user['address'] = $faker->address;
+        }
+
+        if(array_key_exists('include_uuid', $data)) {
+          $user['uuid'] = $faker->uuid;
+        }
+
+        array_push($users, $user);
       }
-
-      if(Input::get('include_birthdate')) {
-        $user['birthdate'] = $faker->date;
-      }
-
-      if(Input::get('include_blurb')) {
-        $user['blurb'] = $faker->text;
-      }
-
-      if(Input::get('include_address')) {
-        $user['address'] = $faker->address;
-      }
-
-      if(Input::get('include_uuid')) {
-        $user['uuid'] = $faker->uuid;
-      }
-
-      array_push($users, $user);
     }
-
+    
     return View::make('user_generator')
-      ->with('users', $users);
+      ->with('users', $users)
+      ->withErrors($validator);
   }
 }
