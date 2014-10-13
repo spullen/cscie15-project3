@@ -26,23 +26,23 @@ class UserGeneratorController extends BaseController {
         $user = array();
         $user['name'] = $faker->name;
 
-        if(array_key_exists('include_email', $data)) {
+        if(array_key_exists('include_email', $data) && $data['include_email']) {
           $user['email'] = $faker->email;
         }
 
-        if(array_key_exists('include_birthdate', $data)) {
+        if(array_key_exists('include_birthdate', $data) && $data['include_birthdate']) {
           $user['birthdate'] = $faker->date;
         }
 
-        if(array_key_exists('include_blurb', $data)) {
+        if(array_key_exists('include_blurb', $data) && $data['include_blurb']) {
           $user['blurb'] = $faker->text;
         }
 
-        if(array_key_exists('include_address', $data)) {
+        if(array_key_exists('include_address', $data) && $data['include_address']) {
           $user['address'] = $faker->address;
         }
 
-        if(array_key_exists('include_uuid', $data)) {
+        if(array_key_exists('include_uuid', $data) && $data['include_uuid']) {
           $user['uuid'] = $faker->uuid;
         }
 
