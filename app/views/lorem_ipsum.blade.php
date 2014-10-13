@@ -5,7 +5,7 @@
     <div class="form-group {{ $errors->has('number_of_paragraphs') ? 'has-error' : '' }}">
       {{ Form::label('number_of_paragraphs', 'Number of paragraphs', array('class' => 'col-md-2 col-sm-2 control-label')) }}
       <div class="col-md-4 col-sm-4">
-        {{ Form::text('number_of_paragraphs', Input::get('number_of_paragraphs', 5), array('class' => 'form-control', 'min' => 1, 'max' => 100)) }}
+        {{ Form::number('number_of_paragraphs', Input::get('number_of_paragraphs', 5), array('class' => 'form-control', 'min' => 1, 'max' => 100)) }}
         <span class="help-block">Number between 1 and 100</span>
         {{ $errors->first('number_of_paragraphs', '<span class="help-block">:message</span>') }}
       </div>
