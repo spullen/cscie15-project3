@@ -8,7 +8,8 @@ class UserGeneratorController extends BaseController {
 
   public function postCreate() {
     $users = array();
-    $data = Input::all();
+    $data = Input::only('number_of_users', 'locale', 'include_email', 'include_birthdate', 
+      'include_blurb', 'include_address', 'include_uuid', 'include_password');
 
     $rules = array(
       'number_of_users' => array('required', 'numeric', 'between:1,100'),
@@ -17,10 +18,29 @@ class UserGeneratorController extends BaseController {
 
     $validator = Validator::make($data, $rules);
 
+    $includePassword = array_key_exists('include_password', $data) && $data['include_password'];
+
+    $pg = null;
+    if($includePassword) {
+      $passwordData = Input::only('number_of_words', 'separator', 'include_number', 
+      'include_special_character', 'upper_case_first_letter', 'camel_case');
+
+      $passwordRules = array(
+        'number_of_words' => array('required', 'numeric', 'between:'.PasswordGenerator::minNumberOfWords.','.PasswordGenerator::maxNumberOfWords),
+        'separator' => array('required', 'in:,-,_,.,#')
+      );
+
+      $passwordValidator = Validator::make($passwordData, $passwordRules);
+
+      if($passwordValidator->passes()) {
+        $pg = new PasswordGenerator($passwordData);
+      } else {
+        // merge validator
+      }
+    }
+    
     if($validator->passes()) {
       $faker = Faker\Factory::create($data['locale']);
-
-      //$pg = new PasswordGenerator(array('number_of_words' => 4));
 
       for($i = 0; $i < $data['number_of_users']; $i++) {
         $user = array();
@@ -44,6 +64,10 @@ class UserGeneratorController extends BaseController {
 
         if(array_key_exists('include_uuid', $data) && $data['include_uuid']) {
           $user['uuid'] = $faker->uuid;
+        }
+
+        if($includePassword) {
+          //$user['password'] = $pg->generate();
         }
 
         array_push($users, $user);
