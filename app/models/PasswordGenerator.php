@@ -28,26 +28,9 @@ class PasswordGenerator {
     $this->words = $this->getWords();
   }
 
-  public function isValid() {
-    if(!is_numeric($this->numberOfWords)) {
-      $this->errors['number_of_words'] = 'must be a valid number between ' . self::minNumberOfWords . ' and ' . self::maxNumberOfWords .  '.';
-    } else {
-      if($this->numberOfWords < self::minNumberOfWords || $this->numberOfWords > self::maxNumberOfWords) {
-        $this->errors['number_of_words'] = 'must be between ' . self::minNumberOfWords . ' and ' . self::maxNumberOfWords .  '.';
-      }
-    }
-
-    // just in case someone tries to enter their own value
-    if(!in_array($this->separator, self::separators(), true)){
-      $this->errors['separator'] = 'must be a valid separator (-_.#).';
-      $this->separator = ''; // reset
-    }
-
-    return count($this->errors) == 0;
-  }
-
   public function generate() {
-    $words = $this->words;
+    // copy array
+    $words = array_merge(array(), $this->words);
     $result = array();
 
     // select random subset of words
