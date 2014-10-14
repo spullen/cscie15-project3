@@ -5,7 +5,7 @@
     <div class="form-group {{ $errors->has('number_of_users') ? 'has-error' : '' }}">
       {{ Form::label('number_of_users', 'Number of users', array('class' => 'col-md-2 col-sm-2 control-label')) }}
       <div class="col-md-4 col-sm-4">
-        {{ Form::number('number_of_users', Input::get('number_of_users', 5), array('class' => 'form-control')) }}
+        {{ Form::number('number_of_users', Input::get('number_of_users', 5), array('class' => 'form-control', 'min' => 1, 'max' => 100)) }}
         <span class="help-block">Number between 1 and 100</span>
         {{ $errors->first('number_of_users', '<span class="help-block">:message</span>') }}
       </div>
@@ -68,8 +68,10 @@
       <div class="form-group {{ $errors->has('number_of_words') ? 'has-error' : '' }}">
         {{ Form::label('number_of_words', 'Number of words', array('class' => 'col-md-2 col-sm-2 control-label')) }}
         <div class="col-md-4 col-sm-4">
-          {{ Form::text('number_of_words', Input::get('number_of_words', 3), array('class' => 'form-control')) }}
-          <span class="help-block">Number between 3 and 6</span>
+          {{ Form::number('number_of_words', Input::get('number_of_words', PasswordGenerator::minNumberOfWords), 
+                array('class' => 'form-control', 'min' => PasswordGenerator::minNumberOfWords, 'max' => PasswordGenerator::maxNumberOfWords)) 
+          }}
+          <span class="help-block">Number between {{ PasswordGenerator::minNumberOfWords }} and {{ PasswordGenerator::maxNumberOfWords }}</span>
           {{ $errors->first('number_of_words', '<span class="help-block">:message</span>') }}
         </div>
       </div>
@@ -168,6 +170,10 @@
 
           @if (Input::get('include_uuid'))
             <p>{{ $user['uuid'] }}</p>
+          @endif
+
+          @if (Input::get('include_password'))
+            <p>{{ $user['password'] }}</p>
           @endif
         </p>
       @endforeach

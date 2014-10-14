@@ -8,68 +8,60 @@ class UserGeneratorController extends BaseController {
 
   public function postCreate() {
     $users = array();
-    $data = Input::only('number_of_users', 'locale', 'include_email', 'include_birthdate', 
-      'include_blurb', 'include_address', 'include_uuid', 'include_password');
+    $data = Input::all();
 
     $rules = array(
       'number_of_users' => array('required', 'numeric', 'between:1,100'),
       'locale' => array('required', 'in:en_US,fr_FR,de_DE,ru_RU,es_ES,it_IT')
     );
 
-    // if include password, array_push $passwordRules onto rules
+    $includePassword = Input::get('include_password', false);
+
+    if($includePassword) {
+      $passwordRules = array(
+        'number_of_words' => array('required', 'numeric', 'between:'.PasswordGenerator::minNumberOfWords.','.PasswordGenerator::maxNumberOfWords),
+        'separator' => array('in:-,_,.,#')
+      );
+
+      $rules = array_merge($rules, $passwordRules);
+    }
 
     $validator = Validator::make($data, $rules);
 
-    $includePassword = array_key_exists('include_password', $data) && $data['include_password'];
-
-    $pg = null;
-    if($includePassword) {
-      $passwordData = Input::only('number_of_words', 'separator', 'include_number', 
-      'include_special_character', 'upper_case_first_letter', 'camel_case');
-
-      $passwordRules = array(
-        'number_of_words' => array('required', 'numeric', 'between:'.PasswordGenerator::minNumberOfWords.','.PasswordGenerator::maxNumberOfWords),
-        'separator' => array('required', 'in:,-,_,.,#')
-      );
-
-      $passwordValidator = Validator::make($passwordData, $passwordRules);
-
-      if($passwordValidator->passes()) {
-        $pg = new PasswordGenerator($passwordData);
-      } else {
-        // merge validator
-      }
-    }
-    
+    $pg = null;   
     if($validator->passes()) {
       $faker = Faker\Factory::create($data['locale']);
+
+      if($includePassword) {
+        $pg = new PasswordGenerator($data);
+      }
 
       for($i = 0; $i < $data['number_of_users']; $i++) {
         $user = array();
         $user['name'] = $faker->name;
 
-        if(array_key_exists('include_email', $data) && $data['include_email']) {
+        if(Input::get('include_email', false)) {
           $user['email'] = $faker->email;
         }
 
-        if(array_key_exists('include_birthdate', $data) && $data['include_birthdate']) {
+        if(Input::get('include_birthdate', false)) {
           $user['birthdate'] = $faker->date;
         }
 
-        if(array_key_exists('include_blurb', $data) && $data['include_blurb']) {
+        if(Input::get('include_blurb', false)) {
           $user['blurb'] = $faker->text;
         }
 
-        if(array_key_exists('include_address', $data) && $data['include_address']) {
+        if(Input::get('include_address', false)) {
           $user['address'] = $faker->address;
         }
 
-        if(array_key_exists('include_uuid', $data) && $data['include_uuid']) {
+        if(Input::get('include_uuid', false)) {
           $user['uuid'] = $faker->uuid;
         }
 
         if($includePassword) {
-          //$user['password'] = $pg->generate();
+          $user['password'] = $pg->generate();
         }
 
         array_push($users, $user);
