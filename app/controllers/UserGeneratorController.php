@@ -16,6 +16,8 @@ class UserGeneratorController extends BaseController {
       'locale' => array('required', 'in:en_US,fr_FR,de_DE,ru_RU,es_ES,it_IT')
     );
 
+    // if include password, array_push $passwordRules onto rules
+
     $validator = Validator::make($data, $rules);
 
     $includePassword = array_key_exists('include_password', $data) && $data['include_password'];
