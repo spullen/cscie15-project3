@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('body')
+  <div class="row"><div class="col-md-12 col-sm-12 col-xs-12">
   {{ Form::open(array('action' => 'UserGeneratorController@postCreate', 'class' => 'form-horizontal')) }}
     <div class="form-group {{ $errors->has('number_of_users') ? 'has-error' : '' }}">
       {{ Form::label('number_of_users', 'Number of users', array('class' => 'col-md-2 col-sm-2 control-label')) }}
@@ -146,39 +147,41 @@
       </div>
     </div>
   {{ Form::close() }}
+  </div></div>
 
-  <div>
-    @if (isset($users))
-      @foreach ($users as $user)
-        <p>
-          <h4>{{ $user['name'] }}</h4>
-          @if (Input::get('include_birthdate'))
-            <p>{{ $user['birthdate'] }}</p>
-          @endif
+  @if (isset($users))
+  <div class="row"><div class="col-md-12 col-sm-12 col-xs-12">
+    @foreach ($users as $user)
+      <p>
+        <h4>{{ $user['name'] }}</h4>
+        @if (Input::get('include_birthdate'))
+          <p>{{ $user['birthdate'] }}</p>
+        @endif
 
-          @if (Input::get('include_email'))
-            <p>{{ $user['email'] }}</p>
-          @endif
+        @if (Input::get('include_email'))
+          <p>{{ $user['email'] }}</p>
+        @endif
 
-          @if (Input::get('include_address'))
-            <p>{{ $user['address'] }}</p>
-          @endif
+        @if (Input::get('include_address'))
+          <p>{{ $user['address'] }}</p>
+        @endif
 
-          @if (Input::get('include_blurb'))
-            <p>{{ $user['blurb'] }}</p>
-          @endif
+        @if (Input::get('include_blurb'))
+          <p>{{ $user['blurb'] }}</p>
+        @endif
 
-          @if (Input::get('include_uuid'))
-            <p>{{ $user['uuid'] }}</p>
-          @endif
+        @if (Input::get('include_uuid'))
+          <p>{{ $user['uuid'] }}</p>
+        @endif
 
-          @if (Input::get('include_password'))
-            <p>{{ $user['password'] }}</p>
-          @endif
-        </p>
-      @endforeach
-    @endif
-  </div>
+        @if (Input::get('include_password'))
+          <p>{{ $user['password'] }}</p>
+        @endif
+      </p>
+    @endforeach
+  </div></div>
+  @endif
+  
 @stop
 
 @section('javascripts')
