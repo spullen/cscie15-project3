@@ -62,7 +62,7 @@ class PasswordGenerator {
   }
 
   private function getWords() {
-    // if the words.txt does not exist locally, scrape the words from the web and filter any words less than 3 characters
+    // scrape the words from the web and filter any words less than 3 characters
     $words = explode("\n", file_get_contents('https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt'));
     $words = array_filter($words, function($w) { return strlen($w) >= 3; });
     return $words;
