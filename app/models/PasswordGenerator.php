@@ -29,15 +29,12 @@ class PasswordGenerator {
   }
 
   public function generate() {
-    // copy array
-    $words = array_merge(array(), $this->words);
     $result = array();
 
-    // select random subset of words
-    for($i = 0; $i < $this->numberOfWords; $i++) {
-      $word = array_rand($words);
-      array_push($result, $words[$word]);
-      unset($words[$word]);
+    $randomWords = array_rand($this->words, $this->numberOfWords);
+
+    foreach ($randomWords as $index) {
+      array_push($result, $this->words[$index]);
     }
 
     // camel case rest of words in result if option selected
