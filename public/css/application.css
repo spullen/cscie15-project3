@@ -1,0 +1,15 @@
+body {
+  background: #f3ebd4;
+  color: #484848;
+}
+
+.container {
+  background: #ffffff;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+
+.top-spacer {
+  padding-top: 50px;
+}

@@ -33,7 +33,7 @@ class PasswordGenerator {
 
     $randomWords = array_rand($this->words, $this->numberOfWords);
 
-    foreach ($randomWords as $index) {
+    foreach($randomWords as $index) {
       array_push($result, $this->words[$index]);
     }
 
