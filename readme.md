@@ -11,6 +11,8 @@ Generate fake data that can be used to mockup websites or be used for test data.
 
 ### Lorem Ipsum Generator
 - Generates n number of lorem ipsum text, where n is between 1 and 100.
+- The number of paragraphs field uses the HTML5 number input
+- Validation is also done on the number of paragraphs field (when HTML5 is not supported)
 
 ### User Generator
 - Generates n number of users between 1 and 100
@@ -30,7 +32,12 @@ Generate fake data that can be used to mockup websites or be used for test data.
       - Special character (!@#$%&)
     - Optionally upper case first letter
     - Optionally came case word
-
+- Validations:
+  - Number of users is required and verified that the number is between 1 and 100
+  - Locale is required and verifed that it is one of the supported locales
+  - When the "Include password" field is checked
+    - Number of words for the password is required and verified that it is between 3 and 6
+    - Separator is verified that it is a supported separator
 
 ## Resources
 - [jQuery](http://jquery.com)
