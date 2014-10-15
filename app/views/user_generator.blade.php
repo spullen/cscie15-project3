@@ -59,12 +59,12 @@
       <div class="col-md-offset-2 col-md-6 col-sm-offset-2 col-sm-6">
         <div class="checkbox">
           <label>
-            {{ Form::checkbox('include_password', 'yes', Input::get('include_password', false)) }} Include password?
+            {{ Form::checkbox('include_password', '1', Input::get('include_password', false), array('id' => 'include_password')) }} Include password?
           </label>
         </div>
       </div>
     </div>
-    <div id="password-fields">
+    <div id="password-fields" style="{{ Input::get('include_password') ? '' : 'display: none;' }}">
       <div class="form-group {{ $errors->has('number_of_words') ? 'has-error' : '' }}">
         {{ Form::label('number_of_words', 'Number of words', array('class' => 'col-md-2 col-sm-2 control-label')) }}
         <div class="col-md-4 col-sm-4">
@@ -179,4 +179,9 @@
       @endforeach
     @endif
   </div>
+@stop
+
+@section('javascripts')
+  @parent
+  <script src="{{ asset('js/user_generator.js') }}"></script>
 @stop

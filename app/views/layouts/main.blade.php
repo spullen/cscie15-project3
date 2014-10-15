@@ -12,7 +12,9 @@
     <div class="col-md-12 col-sm-12 col-xs-12">@yield('body')</div>
   </div>
 </div>
-<script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+@section('javascripts')
+  <script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
+  <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+@show
 </body>
 </html>
