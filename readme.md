@@ -1,25 +1,40 @@
-## Laravel PHP Framework
+# CSCI E-15 Project 3
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+[Visit Site](http://p3.scottpullen.me)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+[Demo]()
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+## Description
+Generate fake data that can be used to mockup websites or be used for test data. Generates lorem ipsum paragraphs for text filler. Generates fake user information that can be used for testing purposes.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Features
 
-## Official Documentation
+### Lorem Ipsum Generator
+- Generates n number of lorem ipsum text, where n is between 1 and 100.
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+### User Generator
+- Generates n number of users between 1 and 100
+- By default just a name is returned in the en-US locale
+- Can select which locale the user is in (en-US, fr-FR, de-DE, ru-RU, es-ES, it-IT)
+- Can optionally include:
+  - Email address
+  - Birth date
+  - A small profile blurb
+  - Address
+  - UUID
+  - Password
+    - Passwords can be between 3 and 6 characters
+    - Words in the passwords can be separated by a separator (-_.#)
+    - Optionally include:
+      - Number
+      - Special character (!@#$%&)
+    - Optionally upper case first letter
+    - Optionally came case word
 
-### Contributing To Laravel
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Resources
+- [jQuery](http://jquery.com)
+- [Bootstrap](http://getbootstrap.com)
+- [word list](https://github.com/first20hours/google-10000-english) (filter words < 3 characters)
+- [badcow/lorem-ipsum](https://packagist.org/packages/badcow/lorem-ipsum)
+- [fzaninotto/faker](https://packagist.org/packages/fzaninotto/faker)
