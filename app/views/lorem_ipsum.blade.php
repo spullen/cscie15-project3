@@ -2,6 +2,11 @@
 
 @section('body')
   <div class="row"><div class="col-md-12 col-sm-12 col-xs-12">
+    <div><a href="/">Home</a></div>
+    <div><a href="{{ action('UserGeneratorController@getCreate') }}">User Generator</a></div>
+    <div class="spacer"></div>
+  </div></div>
+  <div class="row"><div class="col-md-12 col-sm-12 col-xs-12">
     {{ Form::open(array('action' => 'LoremIpsumController@postCreate', 'class' => 'form-horizontal')) }}
       <div class="form-group {{ $errors->has('number_of_paragraphs') ? 'has-error' : '' }}">
         {{ Form::label('number_of_paragraphs', 'Number of paragraphs', array('class' => 'col-md-2 col-sm-2 control-label')) }}

@@ -11,5 +11,9 @@ body {
 }
 
 .top-spacer {
-  padding-top: 50px;
+  padding-top: 30px;
+}
+
+.spacer {
+  padding-bottom: 15px;
 }
