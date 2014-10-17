@@ -2,7 +2,7 @@
 
 [Visit Site](http://p3.scottpullen.me)
 
-[Demo]()
+[Demo](http://screencast.com/t/hkJFuxIgR5IV)
 
 ## Description
 Generate fake data that can be used to mockup websites or be used for test data. Generates lorem ipsum paragraphs for text filler. Generates fake user information that can be used for testing purposes.
